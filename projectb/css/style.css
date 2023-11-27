@@ -1,3 +1,55 @@
-body{
-    color: aqua ;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: lightblue;
+  padding: 40px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  height: 100vh;
+}
+
+header {
+  width: fit-content;
+  margin: 0 auto;
+  font-size: xx-large;
+  font-weight: bolder;
+  margin-bottom: 32px;
+}
+
+.container {
+  height: 85%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.emotion {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 16px;
+  justify-content: space-between;
+}
+
+.button {
+  all: unset;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background-color: cadetblue;
+  color: white;
+  font-size: larger;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.canvas {
+  height: 100%;
+  width: 100%;
+  display: none;
 }

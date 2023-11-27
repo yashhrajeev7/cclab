@@ -1,17 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href = "css/style.css"> 
-        <script src ="js/lib/p5.js"></script>
-        <script src ="js/lib/p5.sound.js"></script>
-        <title>Document</title>
-    </head>
-    <body>
-        <h1>Evolution</h1>
-    <script src = "js/script.js"></script>
-    </body>
-    
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.8.0/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <title>Meditation</title>
+  </head>
+
+  <body>
+    <header>Meditation</header>
+    <div class="container">
+      <div class="emotion">
+        <button class="button">Sad</button>
+        <div id="Sad" class="canvas"></div>
+      </div>
+      <div class="emotion">
+        <button class="button">Angry</button>
+        <div id="Angry" class="canvas"></div>
+      </div>
+      <div class="emotion">
+        <button class="button">Stressed</button>
+        <div id="Stressed" class="canvas"></div>
+      </div>
+      <div class="emotion">
+        <button class="button">Tired</button>
+        <div id="Tired" class="canvas"></div>
+      </div>
+    </div>
+    <script src="./js/script.js"></script>
+  </body>
 </html>

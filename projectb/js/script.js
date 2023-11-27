@@ -1,190 +1,128 @@
-let seq = 0;
+let emotionButtons = document.getElementsByClassName("button");
 
-// SCENE 1
-let rad = 60; // Width of the shape
-let x, y; // Starting position of shape
-let size = 75;
-let xspeed = 2.8; // Speed of the shape
-let yspeed = 2.2; // Speed of the shape
+emotionButtons.forEach(function (button) {
+  button.addEventListener("click", function (e) {
+    let emotion = e.target.innerText;
+    let canvasDiv = document.getElementById(emotion);
+    canvasDiv.style = "display: block";
+    canvas.parent(emotion);
+  });
+});
 
-let xdirection = 1; // Left or Right
-let ydirection = 0; // Top to Bottom
+// p5
 
-let angle = 1;
-
-// SCENE 2
-
+let circleSize = 200; // Initial size of the circle
+let maxSize = 200; // Maximum size of the circle
+let minSize = 130; // Minimum size of the circle
+let growing = true; // circle is growing or shrinking
+let growAmount = 0.2;
+let r, g, b;
+let colorgrow = 90;
 function setup() {
-  createCanvas(1000, 600);
-
-  setupScene1();
-  setupScene2();
-  setupScene3();
+  canvas = createCanvas(400, 400);
+  canvas.parent("Sad");
+  //background(r, g, b);
 }
 
 function draw() {
-  if (seq == 0) {
-    // intro
-    drawScene0_intro();
-  } else if (seq == 1) {
-    // frog ?
-    drawScene1();
-  } else if (seq == 2) {
-    // bird
-    drawScene2();
-  } else if (seq == 3) {
-    // monkey
-    drawScene3();
-  }
-}
+  background(r, g, b);
+  r = 203;
+  g = 4;
+  b = 165;
+  //203, 4, 165)
 
-function keyPressed() {
-  if (key == " ") {
-    seq++;
-  }
-  if (seq > 3) {
-    seq = 0;
-  }
-}
+  let bgColor = color(
+    r + frameCount,
+    (g * frameCount) % 155,
+    b + frameCount * 2
+  );
 
-function drawScene0_intro() {
-  background(100);
-  textAlign(CENTER);
-  text("Intro", width / 2, height / 2);
-  textSize(30);
-}
+  background(bgColor);
 
-function setupScene1() {
-  stroke(2);
-  x = width / 2;
-  y = height / 2;
-}
+  // limit the value in the range 0 to 255
+  r = constrain(r, 0, 255);
+  g = constrain(g, 0, 300);
+  b = constrain(b, 0, 300);
 
-function drawScene1() {
-  background("blue");
-
-  //shape position
-  x = x + xspeed * xdirection;
-  y = y + yspeed * ydirection;
-
-  if (x > width - rad || x < rad) {
-    xdirection *= -1;
-  }
-  if (y > height - rad || y < rad) {
-    xdirection *= -1;
-  }
-  if (mouseIsPressed == true) {
-    size = size + 1;
-    rad = rad + 1;
-  }
-
-  
-  if (size > 110){
-    size = size -1;
-    rad= rad-1;
-  }
-  // Draw the shape
-  stroke('black');
-  fill("red");
-  ellipse(x, y, size, rad);
-  fill("orange");
-  ellipse(x - 45, y + 10, 45, rad * 0.4);
-  fill("black");
-  ellipse(x + 15, y - 5, 25, rad * 0.5);
-  fill("white");
-  ellipse(x + 15, y, 15, rad * 0.3);
-  //triangle(30, 75, 58, 20, 86, 75);
-}
-
-let treeHeight;
-let monkeyX, monkeyY;
-let climbingUp = true;
-
-function setupScene2() {
-  treeHeight = height - 200;
-  monkeyX = width / 2;
-  monkeyY = treeHeight;
-}
-
-function drawScene2() {
-  background("blue");
-
-  // Draw the tree trunk
-  fill(139, 69, 19);
-  rect(width / 2 - 20, treeHeight, 30, height);
-
-  // Draw the monkey
-  strokeWeight(1);
-  stroke("black");
-  fill(139, 69, 19);
-  ellipse(monkeyX, monkeyY, 50, 50);
-  ellipse(monkeyX - 25, monkeyY - 20, 25, 25);
-  ellipse(monkeyX + 25, monkeyY - 20, 25, 25);
-  ellipse(monkeyX, monkeyY + 40, 75, 60);
-  stroke("green");
-  strokeWeight(8);
-  noFill();
-  circle(500, 330, 330);
-  // Update monkey's position
-  if (climbingUp) {
-    monkeyY -= 1;
+  // Update the circle's size based on the frameCount
+  if (growing) {
+    circleSize += growAmount;
+    if (circleSize >= maxSize) {
+      growing = false;
+    }
   } else {
-    monkeyY += 1;
+    circleSize -= growAmount;
+    if (circleSize <= minSize) {
+      growing = true;
+    }
   }
 
-  // Change direction when the monkey reaches the top or bottom
-  if (monkeyY <= treeHeight - 50) {
-    climbingUp = false;
-  } else if (monkeyY >= treeHeight + 30) {
-    climbingUp = true;
+  if (mouseIsPressed) {
+    r = 255;
+    g = 100;
+    b = 0;
+  }
+
+  if (mouseX > 100) {
+    textSize(12);
+    fill(255);
+    stroke(0);
+    strokeWeight(4);
+    text("let the breath lead the way", 20, 50);
+  }
+
+  if (mouseX > 150) {
+    textSize(22);
+    fill(255);
+    stroke(1);
+    strokeWeight(4);
+    text("Just keep breathing ", 150, 80);
+  }
+
+  if (mouseY > 0) {
+    textSize(12);
+    fill("orange");
+    stroke(0);
+    strokeWeight(4);
+    text("Let it go", 300, 150);
+  }
+  // have a gradual change of color
+
+  //refer to the nflx a bit more - start using image rather than circle
+
+  //press buttons instead of keys (label the buttons as different feelings), using html
+
+  //fullscreen
+
+  //add quotes
+
+  //add sound
+
+  //let startcol = 50 + colorgrow
+
+  // circle
+  fill(147, 4, 6);
+  noStroke();
+  ellipse(width / 2, height / 2, circleSize, circleSize);
+  noFill(); //smile
+  stroke(0);
+  arc(width / 2, height / 2, 25, 25, radians(0), radians(180));
+  arc(width * 0.4375, height * 0.4375, 15, 35, radians(5), radians(180));
+  arc(width * 0.5625, height * 0.4375, 15, 35, radians(5), radians(180));
+
+  if (mouseIsPressed) {
+    r = 350;
+    g = 200;
+    b = 0;
   }
 }
 
-
-
-
-  
-
-let birdX, birdY;
-let wingFlap = false;
-
-function setupScene3() {
-  birdX = -50;
-  birdY = height / 2;
-}
-
-function drawScene3() {
-  background(135, 206, 235); // Light blue sky
-
-  //sun
-  stroke('black');
-  strokeWeight(2);
-  fill(255, 204, 0);
-  ellipse(50, 50, 50, 50);
-
-  // bird
-  fill(255);
-  ellipse(birdX, birdY, 30, 20);
-
-  // Make the bird's wings flap
-  if (wingFlap) {
-    line(birdX - 15, birdY, birdX - 30, birdY - 10);
-    line(birdX - 30, birdY - 10, birdX - 45, birdY);
-  } else {
-    line(birdX - 15, birdY, birdX - 30, birdY + 10);
-    line(birdX - 30, birdY + 10, birdX - 45, birdY);
-  }
-
-  wingFlap = !wingFlap;
-
-  // Move the bird across the canvas
-  birdX += 1.5;
-
-  // Reset bird's position when it flies off the screen
-  if (birdX > width + 30) {
-    birdX = -30;
-    birdY = random(height / 2, height - 50);
+function keyTyped() {
+  if (key === "s") {
+    growAmount = 0.1;
+    colorgrow = 3;
+  } else if (key === "h") {
+    growAmount = 0.5;
+    colorgrow = 10;
   }
 }
-
-
