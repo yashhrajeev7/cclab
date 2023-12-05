@@ -26,7 +26,7 @@ emotionButtons.forEach(function (button) {
 // p5
 
 function preload() {
-  mySound = loadSound("/js/assets/yogaMusic.mp3");
+  mySound = loadSound("js/assets/yogaMusic.mp3");
 }
 
 function setup() {
